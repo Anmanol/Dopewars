@@ -1,0 +1,211 @@
+* {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+body {
+    font-family: 'Open Sans', Helvetica, Arial, FreeSans, Verdana, Tahoma, 'Lucida Sans', 'Lucida Sans Unicode', 'Luxi Sans', sans-serif;
+    background-color: rgb(10, 20, 10);
+}
+
+p {
+    overflow: hidden;
+}
+
+a {
+    color: rgb(255, 249, 132);
+    text-decoration: none;
+}
+a:hover {
+    color: rgb(252, 69, 54);
+    text-decoration: none;
+}
+#container {
+    width: 1000px;
+    margin: 0 auto;
+}
+#main {
+    /*width:600px;*/
+    display: inline-block;
+    height: 700px;
+    width: 75%;
+    background-color: #0D3017;
+    color: #fff;
+    padding: 5px 15px;
+}
+#noteapp {
+    background-color: #0d2130;
+    width: 18%;
+    height: 700px;
+    vertical-align: top;
+    padding: 5px 15px;
+    display: inline-block;
+    color: #C8E2FB;
+}
+#noteapp strong{
+    color: #7DBDFB;
+}
+#noteapp p:nth-child(n+3){
+    margin: 16px 0 16px 0;
+    height: 22px;
+}
+#stats,
+#consol {
+    /*height:30px;*/
+    display: none;
+    background-color: #eee;
+    padding: 5px 10px;
+}
+#consol button{
+    width: auto;
+}
+
+button {
+    /*margin: 5px;*/
+    /*float: left;*/
+    height: 22px;
+    cursor: pointer;
+    width: 100px;
+}
+
+button:last-child() {
+    clear: both;
+}
+
+#one {
+    background-color: #99c2ff;
+    height: 150px;
+    width: 150px;
+}
+
+.name {
+    background-color: #134321;
+    border: 2px solid rgb(221, 221, 221);
+    box-sizing: border-box;
+    color: #fff;
+    display: inline-block;
+    font-family: Arial;
+    height: 22px;
+    margin-right: 10px;
+    font-size: 13px;
+    padding: 1px 6px;
+    text-align: center;
+    width: 110px;
+}
+
+.fly,
+.return,
+.wait,
+#go,
+#restart,
+.readnews,
+.rereadnews {
+    background-color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    width: 150px;
+    margin-top: 20px;
+    height: 40px;
+    float: left;
+}
+
+.readnews,
+.rereadnews {
+    margin-left: 15px !important;
+}
+
+.wait,
+.readnews {
+    background-color: #d3d3d3;
+    font-weight: normal;
+    width: 143px;
+    margin-left: 55px;
+}
+
+h1 {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.prices {
+    padding: 0 5px;
+    width: 70px;
+    display: inline-block;
+}
+
+.sell {
+    margin-left: 10px;
+}
+
+.sell_all,
+.buy10,
+.wait,
+.readnews,
+.rereadnews {
+    background: #bcc;
+}
+
+.buy10 {
+    width: 40px;
+}
+
+#outadd {
+    font-weight: bold;
+    font-style: italic;
+    -webkit-animation: blink5 1.5s linear 2 forwards;
+    animation: blink5 1.5s linear 2 forwards;
+}
+
+@-webkit-keyframes blink5 {
+    0% {
+        color: rgb(255, 255, 255);
+    }
+    50% {
+        color: rgb(250, 180, 140);
+    }
+    100% {
+        color: rgb(255, 255, 255);
+    }
+}
+
+@keyframes blink5 {
+    0% {
+        color: rgb(128, 0, 0);
+    }
+    50% {
+        color: rgb(200, 80, 40);
+    }
+    100% {
+        color: rgb(128, 0, 0);
+    }
+}
+
+.newscontainer {
+    position: relative;
+    display: inline-block;
+    padding-top: 16px;
+}
+
+.newstext {
+    display: block;
+    position: absolute;
+    text-align: center;
+    color: rgb(25, 25, 25);
+    top: 80px;
+    left: 20%;
+    width: 234px;
+}
+
+.newstext {
+    display: block;
+    position: absolute;
+    text-align: center;
+    color: rgb(25, 25, 25);
+    top: 96px;
+    left: 20%;
+    width: 234px;
+    font-family: 'Times new roman';
+    font-size: 17px;
+    line-height: 1;
+}
