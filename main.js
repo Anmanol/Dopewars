@@ -36,6 +36,7 @@ var daysInCity; // дней в одном городе
 var currentCityId; // запоминаем ID текущего города
 var currentCity; // имя текущего города / начальное значение (стартовый город)
 var rememberCityId;
+var narcLimit; // ограничение емкости инвентаря
 
 var travelPrices = []; // храним текущие цены на перелеты
 var narcPrices = []; // храним текущие цены на наркоту
@@ -64,6 +65,7 @@ function newGame() {
     currentCityId = -1; // запоминаем ID текущего города
     currentCity = "Москва"; // начальное значение (стартовый город)
     rememberCityId = -1;
+    narcLimit = 100; // ограничение емкости инвентаря (100 единиц изначально)
     travelPrices = []; // храним текущие цены на перелеты
     narcPrices = []; // храним текущие цены на наркоту
     narcDiscount = -1; // скидка/наценка на наркоту (какая наркота)
@@ -119,7 +121,9 @@ function showStats() {
             NoteAppBlock.innerHTML += "<p>&nbsp;</p>";
         }
     }
+    NoteAppBlock.innerHTML += "<br/><p style='color: #2aa26f;'>Всего: <strong style='color: #38DE97;'>" + countNark() + "</strong> / <strong style='color: #38DE97;'>" + narcLimit + "</strong></p>"; // дней в игре
     NoteAppBlock.innerHTML += "<br/><p style='color: #2aa26f;'>Дней в деле: <strong style='color: #38DE97;'>" + days + "</strong></p>"; // дней в игре
+    
 }
 
 // вывод и выбор городов
@@ -198,7 +202,7 @@ function lookClickCity() {
     };
 }
 
-// обработчик клика по кнопке наркоты
+// обработчик клика на экране покупки наркоты
 function lookClickNark() {
     document.getElementById('main').onclick = function (e) {
         var event = e;
@@ -237,26 +241,36 @@ function lookClickNark() {
         for (var i = 0; i < narcotics.length; i++) {
             if (i == target.id) {
                 if (target.className === "buy") {
-                    if (yourMoney >= narcPrices[i]) { // проверяем, хватает ли денег на покупку наркоты
-                        yourMoney -= narcPrices[i]; // вычитаем деньги за покупку
-                        myNarkPrices[i] = myNarcotics[i] * myNarkPrices[i]; // считаем сумму, для дальнейшего расчета средней цены
-                        myNarcotics[i] += 1; // кладем наркоту в инвентарь
-                        myNarkPrices[i] = +((myNarkPrices[i] + narcPrices[i]) / myNarcotics[i]).toFixed(0); // запоминаем почем брали
-                        showStats(); // обновляем инвентарь
-                        break;
+                    if (countNark() < narcLimit) {
+                        log(countNark());
+                        log(narcLimit);
+                        if (yourMoney >= narcPrices[i]) { // проверяем, хватает ли денег на покупку наркоты
+                            yourMoney -= narcPrices[i]; // вычитаем деньги за покупку
+                            myNarkPrices[i] = myNarcotics[i] * myNarkPrices[i]; // считаем сумму, для дальнейшего расчета средней цены
+                            myNarcotics[i] += 1; // кладем наркоту в инвентарь
+                            myNarkPrices[i] = +((myNarkPrices[i] + narcPrices[i]) / myNarcotics[i]).toFixed(0); // запоминаем почем брали
+                            showStats(); // обновляем инвентарь
+                            break;
+                        } else {
+                            outAdd("Не хватает денег на покупку этой наркоты!");
+                        }
                     } else {
-                        outAdd("Не хватает денег на покупку этой наркоты!");
+                            outAdd("Не хватает места в инвентаре!");
                     }
                 } else if (target.className === "buy10") {
-                    if (yourMoney >= narcPrices[i] * 10) { // проверяем, хватает ли денег на покупку наркоты
-                        yourMoney -= narcPrices[i] * 10; // вычитаем деньги за покупку
-                        myNarkPrices[i] = myNarcotics[i] * myNarkPrices[i]; // считаем сумму, для дальнейшего расчета средней цены
-                        myNarcotics[i] += 10; // кладем наркоту в инвентарь
-                        myNarkPrices[i] = +((myNarkPrices[i] + narcPrices[i] * 10) / myNarcotics[i]).toFixed(1); // запоминаем почем брали
-                        showStats(); // обновляем инвентарь
-                        break;
+                    if ((countNark() + 9) < narcLimit) {
+                        if (yourMoney >= narcPrices[i] * 10) { // проверяем, хватает ли денег на покупку наркоты
+                            yourMoney -= narcPrices[i] * 10; // вычитаем деньги за покупку
+                            myNarkPrices[i] = myNarcotics[i] * myNarkPrices[i]; // считаем сумму, для дальнейшего расчета средней цены
+                            myNarcotics[i] += 10; // кладем наркоту в инвентарь
+                            myNarkPrices[i] = +((myNarkPrices[i] + narcPrices[i] * 10) / myNarcotics[i]).toFixed(1); // запоминаем почем брали
+                            showStats(); // обновляем инвентарь
+                            break;
+                        } else {
+                            outAdd("Не хватает денег на покупку этой наркоты!");
+                        }
                     } else {
-                        outAdd("Не хватает денег на покупку этой наркоты!");
+                            outAdd("Не хватает места в инвентаре!");
                     }
                 } else if (target.className === "sell") {
                     if (myNarcotics[i]) { // проверяем, есть ли в инвентаре эта наркота

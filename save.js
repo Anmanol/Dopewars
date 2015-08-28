@@ -17,6 +17,7 @@ function saveGameState() {
     localStorage["mission"] = mission; // счетчик текущей миссии
     localStorage["currentQuest"] = currentQuest; // счетчик текущего квеста
     localStorage["days"] = days; // дней прошло
+    localStorage["narcLimit"] = narcLimit; // ограничение инвентаря
     localStorage["daysInCity"] = daysInCity; // дней в одном городе
     localStorage["currentCityId"] = currentCityId; // запоминаем ID текущего города
     localStorage["currentCity"] = currentCity; // начальное значение (стартовый город)
@@ -64,6 +65,7 @@ function resumeGame() {
     mission = parseInt(localStorage["mission"]); // счетчик текущей миссии
     currentQuest = parseInt(localStorage["currentQuest"]); // счетчик текущего квеста
     days = parseInt(localStorage["days"]); // дней прошло
+    narcLimit = parseInt(localStorage["narkLimit"]); // ограничение инвентаря
     daysInCity = parseInt(localStorage["daysInCity"]); // дней в одном городе
     currentCityId = parseInt(localStorage["currentCityId"]); // запоминаем ID текущего города
     currentCity = localStorage["currentCity"]; // начальное значение (стартовый город)
